@@ -7,7 +7,10 @@
         "plugin:react/recommended",
         "airbnb",
         "plugin:prettier/recommended",
-        "react-app"
+        "react-app",
+        "react-app/jest",
+        "eslint:recommended",
+        "plugin:jest/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
