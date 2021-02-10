@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+    container_name: task-manager-client
+    command: serve -s build -l 3000
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      task-manager-network:
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: task-manager-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - client
+    networks:
+      task-manager-network:
+
+networks:
+  task-manager-network:
+    driver: bridge

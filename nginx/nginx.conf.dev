@@ -1,0 +1,17 @@
+server {
+    listen 80;
+
+    server_name task-manager.local;
+    #sockets
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+
+    location / {
+        proxy_pass http://client:3000;
+    }
+
+    location /api {
+        proxy_pass https://uxcandy.com/~shapoval/test-task-backend/v2;
+    }
+}
